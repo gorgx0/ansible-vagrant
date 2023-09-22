@@ -1,0 +1,30 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Update apt cache
+    apt: update_cache=yes
+  - name: Install packages
+    apt:
+      pkg:
+        - git
+        - zsh
+        - unzip
+        - zip
+      state: latest
+  - name: create empty dot_zshrc
+    file:
+      path: /home/vagrant/.zshrc
+      state: touch
+      owner: vagrant
+      group: vagrant
+  - name: install oh-my-zsh
+    become_user: vagrant
+    command: $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
+    register: whoami
+  - name: Make zsh default shell
+    user:
+      name: vagrant
+      shell: /usr/bin/zsh
+
+  - debug:
+      var: whoami
