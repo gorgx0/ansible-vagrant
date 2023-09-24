@@ -4,6 +4,7 @@
       - nvm
       - joel-porquet/zsh-dircolors-solarized
     zsh_autosuggestions_bind_key: "^U"
+    homebrew_user: vagrant
   roles:
     - viasite-ansible.zsh        
     - role: stephdewit.nvm
@@ -16,4 +17,6 @@
       sdkman_users:
         - vagrant
     - role: monolithprojects.homebrew
+      become: true
+
 
