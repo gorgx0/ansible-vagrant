@@ -1,9 +1,10 @@
 - hosts: all
-  become: yes
   tasks:
   - name: Update apt cache
+    become: yes
     apt: update_cache=yes
   - name: Install packages
+    become: yes
     apt:
       pkg:
         - git
@@ -17,14 +18,12 @@
       state: touch
       owner: vagrant
       group: vagrant
-  - name: install oh-my-zsh
-    become_user: vagrant
-    command: $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
-    register: whoami
   - name: Make zsh default shell
     user:
       name: vagrant
       shell: /usr/bin/zsh
+  - name: some task 
+    shell: whoami
 
-  - debug:
-      var: whoami
+#   - debug:
+#       var: whoami
