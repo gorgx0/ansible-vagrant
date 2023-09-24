@@ -9,6 +9,8 @@
     - role: stephdewit.nvm
       become: true
       become_user: vagrant
+      environment:
+        NVM_DIR: /home/vagrant/.nvm
       nvm_version: latest
       nvm_node_version: lts
     - role: gantsign.sdkman
