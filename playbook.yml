@@ -1,30 +1,9 @@
 - hosts: all
-  tasks:
-  - name: Update apt cache
-    become: yes
-    apt: update_cache=yes
-  - name: Install packages
-    become: yes
-    apt:
-      pkg:
-        - git
-        - zsh
-        - unzip
-        - zip
-      state: latest
-  - name: create empty dot_zshrc
-    file:
-      path: /home/vagrant/.zshrc
-      state: touch
-      owner: vagrant
-      group: vagrant
-  - name: Make zsh default shell
-    become: yes
-    user:
-      name: vagrant
-      shell: /usr/bin/zsh
-  - name: some task 
-    shell: whoami
+  vars:
+    zsh_antigen_bundles_extras:
+      - nvm
+      - joel-porquet/zsh-dircolors-solarized
+    zsh_autosuggestions_bind_key: "^U"
+  roles:
+    - viasite-ansible.zsh        
 
-#   - debug:
-#       var: whoami
