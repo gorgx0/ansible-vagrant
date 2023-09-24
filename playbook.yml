@@ -6,4 +6,12 @@
     zsh_autosuggestions_bind_key: "^U"
   roles:
     - viasite-ansible.zsh        
+    - role: stephdewit.nvm
+      become: true
+      become_user: vagrant
+      nvm_version: latest
+      nvm_node_version: lts
+    - role: gantsign.sdkman
+      sdkman_users:
+        - vagrant
 
