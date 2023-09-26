@@ -4,28 +4,57 @@
     zsh_antigen_bundles_extras:
       - git
       - sudo
+      - nvm
       - zsh-users/zsh-autosuggestions
       - zsh-users/zsh-syntax-highlighting
     zsh_autosuggestions_bind_key: "^U"
   tasks:
-  - name: apt update and upgrade
+  - name: 'apt update'
     become: true
     apt:
-      upgrade: yes
       update_cache: yes
-      cache_valid_time: 86400
+
+  - name: 'apt install python3'
+    become: true
+    apt:
+      name: python3
+      state: present
+
+  - name: "apt install python3-pip"
+    become: true
+    apt:
+      name: python3-pip
+      state: present
+      update_cache: yes
+
+  - name: "apt install zip"
+    become: true
+    apt:
+      name: zip
+      state: present
+      update_cache: yes
+
+  - name: "apt install unzip"
+    become: true
+    apt:
+      name: unzip
+      state: present
+      update_cache: yes
+
   roles:
+    - role: monolithprojects.homebrew
+      become: true
+    - role: viasite-ansible.zsh
+    - role: gikeymarcia.neovim
+      become: true
     - role: stephdewit.nvm
       become: true
       become_user: vagrant
       environment:
         NVM_DIR: /home/vagrant/.nvm
       nvm_version: latest
+      nvm_node_version: lts
     - role: gantsign.sdkman
+      become: true
       sdkman_users:
         - vagrant
-    - role: monolithprojects.homebrew
-      become: true
-    - role: viasite-ansible.zsh
-    - role: gikeymarcia.neovim
-      become: true
