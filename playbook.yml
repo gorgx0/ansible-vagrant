@@ -5,6 +5,7 @@
       - git
       - sudo
       - nvm
+      - brew
       - zsh-users/zsh-autosuggestions
       - zsh-users/zsh-syntax-highlighting
     zsh_autosuggestions_bind_key: "^U"
