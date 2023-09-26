@@ -1,10 +1,12 @@
 - hosts: all
   vars:
-    zsh_antigen_bundles_extras:
-      - nvm
-      - joel-porquet/zsh-dircolors-solarized
-    zsh_autosuggestions_bind_key: "^U"
     homebrew_user: vagrant
+    zsh_antigen_bundles_extras:
+      - git
+      - sudo
+      - zsh-users/zsh-autosuggestions
+      - zsh-users/zsh-syntax-highlighting
+    zsh_autosuggestions_bind_key: "^U"
   tasks:
   - name: apt update and upgrade
     become: true
@@ -13,7 +15,6 @@
       update_cache: yes
       cache_valid_time: 86400
   roles:
-    - viasite-ansible.zsh        
     - role: stephdewit.nvm
       become: true
       become_user: vagrant
@@ -25,5 +26,4 @@
         - vagrant
     - role: monolithprojects.homebrew
       become: true
-
-
+    - role: viasite-ansible.zsh
