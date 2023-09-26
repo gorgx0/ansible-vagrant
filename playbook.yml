@@ -27,3 +27,5 @@
     - role: monolithprojects.homebrew
       become: true
     - role: viasite-ansible.zsh
+    - role: gikeymarcia.neovim
+      become: true
